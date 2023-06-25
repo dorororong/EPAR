@@ -1,0 +1,14 @@
+<form method="post" enctype="multipart/form-data"
+    hx-POST='{% url "score_check:create_reference_subsubject" %}'
+    hx-on= "htmx:afterRequest: this.remove()"
+    hx-trigger="click from:#submit-all">
+    {% csrf_token %}
+    <input type="hidden" name = "grade" value = {{grade}}>
+    <input type="hidden" name = "subject" value = {{subject}}>
+
+    <div style="display: flex; justify-content: flex-start;">
+    <p class="col-6 cold-md-5">{{grade}}-{{subject}}  영역 : {{ form.subsubject}}</p>
+    <button style="height:30px" type="button" hx-on="click: this.closest('form').remove()"> 삭제</button>
+
+    </div>
+</form>

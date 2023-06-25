@@ -1,0 +1,15 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">게시판 개별 페이지입니다</h1>
+
+<ul class="list-group">
+    <a>제목</a> <li class="list-group-item">{{post.postname}}</li>
+    <p></p>
+    <a>내용</a>
+    <li class="list-group-item">{{post.content}}</li>
+</ul>
+
+<a href="/board/" class="btn btn-primary mt-2">목록</a>
+
+{% endblock %}

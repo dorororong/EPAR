@@ -1,0 +1,44 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'score_check/navbar.html' %}
+
+
+
+<form method="get">
+    <select name="subject_id">
+        <option value="">Select a subject</option>
+        {% for subject in subjects %}
+        <option value="{{ subject.id }}" {% if subject == selected_subject %}selected{% endif %}>{{ subject }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Show">
+</form>
+{% if selected_subject %}
+<h2>Selected subject: {{ selected_subject }}</h2>
+
+{% for subsubject, score_query in subsubjects_scores %}
+
+    {{ subsubject }}
+<table style="border: 1px solid black; border-collapse: collapse;">
+    <tr>
+        <th style="border: 1px solid black;">세부영역</th>
+        <th style="border: 1px solid black;">점수표</th>
+    </tr>
+    {% for score in score_query %}
+    <tr>
+        <td style="border: 1px solid black;">{{ score.score_name }}</td>
+        <td style="border: 1px solid black;">{{ score.score_list }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2" style="text-align: center; border: 1px solid black;">점수없음</td>
+    </tr>
+    {% endfor %}
+</table>
+<br> <!-- This will add a line break after each table -->
+{% endfor %}
+{% endif %}
+
+{% endblock %}

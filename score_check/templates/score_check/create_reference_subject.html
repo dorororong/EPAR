@@ -1,0 +1,40 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'score_check/navbar.html' %}
+<form action="POST">
+<div style="margin-left:10px; display: flex; justify-content: flex-start; align-items: center; gap: 20px; flex-wrap: wrap;">
+
+    <div>
+        <label>학년</label>
+        <select name="grade" id="grade">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="subject">과목</label>
+        <input type="text" name="subject" id="subject">
+    </div>
+
+    <div style="padding-right: 10px;"
+        hx-get="{% url 'score_check:create_reference_subsubject'  %}"
+        hx-target="#create_reference_subsubject"
+        hx-swap="beforeend"
+        hx-vals = "js:{grade: document.getElementById('grade').value, subject: document.getElementById('subject').value}">
+        <button type="button">추가하기</button>
+    </div>
+</form>
+
+
+</div>
+<div id="create_reference_subsubject"></div>
+<button style="margin-left:10px" type="button" id="submit-all">등록하기</button>
+
+
+
+
+{% endblock %}

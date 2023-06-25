@@ -1,0 +1,29 @@
+
+<body>
+    <form action='{% url "score_check:score_check_upload_check" %}'
+          method="post" enctype="multipart/form-data"
+        style="float-left">
+        {% csrf_token %}
+        <div>
+            <label>SubSubject</label>
+
+            <select id="subsubjects" name="subsubject">
+            {% for subsubject in subsubjects %}
+                <option value="{{subsubject.pk}}">{{subsubject}}</option>
+
+
+            {% endfor %}
+                </select>
+        </div>
+        <div>
+            <label for="file">Select a file:</label>
+            <input type="file" id="file" name="file">
+            {% if form.file.errors %}
+                <div class="error">{{ form.file.errors }}</div>
+            {% endif %}
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+

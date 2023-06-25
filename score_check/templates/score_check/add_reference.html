@@ -1,0 +1,85 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'score_check/navbar.html' %}
+
+
+
+<div style=" margin-left: 15px   ">
+<form method="post"
+
+
+>
+
+{% csrf_token %}
+<p style="float:left">
+    <label>학년</label>
+    <select name="grade"
+            id = "grade"
+            hx-get='{% url "score_check:get_subjects" %}'
+            hx-target="#subject"
+            hx-indicator=".htmx-indicator">
+
+        <option value="" selected>학년을 선택해주세요</option>
+      {% for grade in grades %}
+
+        <option value="{{ grade.grade }}">{{ grade.grade }}</option>
+      {% endfor %}
+    </select>
+</p>
+
+
+<p style="float:left" >
+    <div id="subject" name = "subject"  style="float:left">
+    <label>&nbsp;&nbsp;&nbsp;&nbsp;과목</label>
+    <select>
+        <option value="">과목을 선택해주세요</option>
+    <select>
+
+    </div>
+</p>
+
+    <div id="subsubject" name="subsubject" style="float:left; margin-right:15px" >
+    <label >&nbsp;&nbsp;&nbsp;&nbsp;영역</label>
+    <select >
+     <option value=''>영역을 선택해주세요</option>
+
+    </select>
+    </div>
+
+    <div style= "padding-right: 10px; "
+            hx-get="{% url 'score_check:add_reference_score'  %}"
+        hx-target="#add_reference_score"
+        hx-swap="beforeend"
+    hx-vals = "js:{subsubject_id: document.getElementById('subsubject_idchecktt').value}">
+        <button type="button">추가하기</button>
+    </div>
+
+    <label></label>
+
+    <p id="subsubject_idcheck"  name="subsubject_idcheck"></p>
+</form>
+
+
+
+
+
+
+
+
+<div id="add_reference_score" name = "add_reference_score" >
+
+
+</div>
+
+    <p>
+</p>
+
+    <button type="button" id="submit-all">등록하기</button>
+
+</div>
+
+
+{% endblock %}
+

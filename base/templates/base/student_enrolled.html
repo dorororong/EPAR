@@ -1,0 +1,19 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<head>학생 제적 현황</head>
+<body name="student_enrolled" id = "student_enrolled" >
+<form method="POST" action="{% url 'base:student_enrolled' %}" >
+    {% csrf_token %}
+    {{form.not_enrolled}}
+    <input type="hidden" name="school" value="{{ userinfo.school.id }}">
+    <input type="hidden" name="semester" value="{{ userinfo.semester.id }}">
+    <button type="submit" class="btn btn-primary">미재적학생등록(학년-반-번호)</button>
+</form>
+
+<div id="not_enrolled_list">
+    {% include 'base/student_enrolled_list.html' %}
+</div>
+
+</body>
+{% endblock %}

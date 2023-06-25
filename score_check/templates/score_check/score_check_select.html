@@ -1,0 +1,71 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'score_check/navbar.html' %}
+
+<div style=" margin-left: 15px   ">
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<p style="float:left">
+    <label>학년</label>
+    <select name="grade"
+            id = "grade"
+            hx-get='{% url "score_check:get_subjects" %}'
+            hx-target="#subject"
+            hx-indicator=".htmx-indicator">
+
+        <option value="" selected>학년을 선택해주세요</option>
+      {% for grade in grades %}
+
+        <option value="{{ grade.grade }}">{{ grade.grade }}</option>
+      {% endfor %}
+    </select>
+</p>
+
+
+<p style="float:left" >
+    <div id="subject" name = "subject"  style="float:left">
+    <label>&nbsp;&nbsp;&nbsp;&nbsp;과목</label>
+    <select>
+        <option value="">과목을 선택해주세요</option>
+    <select>
+
+    </div>
+</p>
+
+    <div id="subsubject" name="subsubject"  >
+    <label >&nbsp;&nbsp;&nbsp;&nbsp;영역</label>
+    <select >
+     <option value=''>영역을 선택해주세요</option>
+
+    </select>
+    </div>
+
+
+    <label for="file">Select a file:</label>
+    <input type="file" id="file" name="file">
+    {% if form.file.errors %}
+        <div class="error">{{ form.file.errors }}</div>
+    {% endif %}
+
+
+<input type="submit" value="점수체크">
+
+
+</form>
+
+    <input type ='hidden' name='subsubject_idcheck' value='{subsubject_id}' id='subsubject_idcheck'>
+
+<div style="margin-left : 15px; margin-right : 200px; border: 1px solid black; padding: 5px; display: inline-block;">
+    {% if error_list %}
+    <p style="color:red ">{{error_name}}</p>
+    {% for error in error_list %}
+        <p>{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+</div>
+
+
+</div>
+{% endblock %}

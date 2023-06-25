@@ -1,0 +1,102 @@
+{% load static %}
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/htmx.org@1.9.2"></script>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Main Page</title>
+    <style>
+        .jumbotron {
+            background-color: #f8f9fa;
+            margin-bottom: 0;
+            padding: 5px;
+            max-width: 2000px;
+            margin: 0 auto;
+            line-height: 100%;
+            padding-top: 10px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+    </style>
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <p style="font-size: 24px; margin-bottom: 5px;">EPAR</p>
+                        <p style="font-size: 12px; margin-bottom: 0;">Educational Paperwork Automatic Reviewing</p>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <p style="margin-top: 5px;"><a href="{% url 'login:logout' %}">Logout</a></p>
+                        <p><a href="{% url 'base:my_page' %}">my page</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'base:main' %}">MAIN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Add more nav items here -->
+            <ul class="navbar-nav main-nav-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'score_check:how_to' %}">수행평가점수확인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'board:board' %}">게시판</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+
+<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+{% block content %}
+
+  <div class="content-block" style="margin:20px;">
+    <h1>this is main page</h1>
+    <h1>{{school}} {{username}} </h1>
+  </div>
+
+{% endblock %}
+
+
+<script>
+$(document).ready(function() {
+    if (window.location.pathname !== '/') { // Replace '/' with the path to your main page if it's different
+        $('.main-nav-items').hide();
+    }
+});
+</script>
+
+</body>

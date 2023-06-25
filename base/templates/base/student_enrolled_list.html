@@ -1,0 +1,15 @@
+
+<head>미재적 명단</head>
+<ul class="list-group col-4">
+{% for student in enrolled_list%}
+{% csrf_token %}
+<li class="list-group-item">{{student.not_enrolled}}
+<button class="badge badge-primary badge-pill"
+      hx-delete="{% url 'base:delete_enrolled' student.id %}"
+      hx-indicator=".htmx-indicator"
+      hx-swap="outerHTML"
+      hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>x</button>
+</li>
+{% endfor %}
+</ul>
+

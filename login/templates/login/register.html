@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <!-- Add your CSS here -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        .register-panel {
+            max-width: 400px;
+            margin: 40px auto; /* Added space above the form */
+            padding: 20px;
+        }
+
+        .form-control {
+            width: 100%; /* Adjust the width of the input boxes */
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="register-panel mt-4">
+            <form method="POST" class="text-center">
+                {% csrf_token %}
+                <form method="POST" class="text-center">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="ID" required>
+                        {{ register_form.username.errors }}
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="이메일" required>
+                        {{ register_form.email.errors }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" name="password1" class="form-control" placeholder="비밀번호(8자 이상, 특수문자 포함)" required>
+                        {{ register_form.password1.errors }}
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password2" class="form-control" placeholder="비밀번호 확인" required>
+                        {{ register_form.password2.errors }}
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="school" class="form-control" placeholder="학교 (ex : 온곡중학교)" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">계정만들기</button>
+                </form>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

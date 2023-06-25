@@ -1,0 +1,43 @@
+{% extends 'base/main.html' %}
+
+
+<style>
+
+
+
+</style>
+smaller input box for username
+
+
+{% block content %}
+<h1>my page</h1>
+
+<form method="POST" action="{% url 'base:my_page' %}">
+    {% csrf_token %}
+    <table>
+        {% for field in user_form %}
+        <tr>
+            <td><label for="{{ field.id_for_label }}">{{ field.label }}</label></td>
+            <td>{{ field }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td><label for="{{ user_info_form.school.id_for_label }}">School</label></td>
+            <td>{{ user_info_form.school }}</td>
+        </tr>
+        <tr>
+            <td><label for="{{ user_info_form.semester.id_for_label }}">semester</label></td>
+            <td>{{ user_info_form.semester }}</td>
+        </tr>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+
+
+
+
+<p>
+<a href="{% url 'base:student_enrolled' %}">학교재적현황</a>
+</p>
+{% endblock %}

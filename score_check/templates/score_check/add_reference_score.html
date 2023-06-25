@@ -1,0 +1,14 @@
+<form method="post" enctype="multipart/form-data"
+    hx-POST='{% url "score_check:add_reference_score" %}'
+    hx-on= "htmx:afterRequest: this.remove()"
+    hx-trigger="click from:#submit-all">
+    {% csrf_token %}
+    <input type="hidden" name="subsubject" value={{subsubject_id}}>
+    <div style="display: flex; justify-content: flex-start;">
+    <p class="col-4 cold-md-3" >{{score_Form.score_name.label}} {{ score_Form.score_name }}</p>
+    <p class="col-6 cold-md-5">{{score_Form.score_list.label}} {{ score_Form.score_list}}</p>
+    <button style="height:30px" type="button" hx-on="click: this.closest('form').remove()"> 삭제</button>
+
+    </div>
+
+</form>
