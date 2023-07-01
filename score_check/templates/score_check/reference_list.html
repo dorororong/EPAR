@@ -16,11 +16,26 @@
     <input type="submit" value="Show">
 </form>
 {% if selected_subject %}
-<h2>Selected subject: {{ selected_subject }}</h2>
+<h2>{{ selected_subject }}</h2>
 
 {% for subsubject, score_query in subsubjects_scores %}
-
+<form action="POST" style = "float:left">
     {{ subsubject }}
+    <button
+      hx-delete="{% url 'score_check:Reference_list_delete' subsubject.id %}"
+      hx-indicator=".htmx-indicator"
+      hx-swap="outerHTML"
+      hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>삭제</button>
+    </form>
+    <form action="POST">
+<button
+      hx-post="{% url 'score_check:Reference_list_update' subsubject.id %}"
+      hx-indicator=".htmx-indicator"
+      hx-swap="outerHTML"
+      hx-target="#score_table_{{subsubject.id}}"
+      hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>업데이트</button>
+    </form>
+<div id = score_table_{{subsubject.id}}>
 <table style="border: 1px solid black; border-collapse: collapse;">
     <tr>
         <th style="border: 1px solid black;">세부영역</th>
@@ -37,6 +52,7 @@
     </tr>
     {% endfor %}
 </table>
+    </div>
 <br> <!-- This will add a line break after each table -->
 {% endfor %}
 {% endif %}

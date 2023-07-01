@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-# from django.views.generic import FormView
+from django.views.generic import FormView, UpdateView
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
@@ -186,7 +186,7 @@ def reference_list(request):
         subsubjects = ReferenceSubsubject.objects.filter(subject_id=subject_id)
 
         # Make sure that each QuerySet is evaluated to a list
-        scores = [list(ReferenceScore.objects.filter(subsubject=subsubject)) for subsubject in subsubjects]
+        scores = [list(ReferenceScore.objects.filter(subsubject=subsubject).order_by('score_name')) for subsubject in subsubjects]
 
         # Zip subsubjects and scores together
         subsubjects_scores = zip(subsubjects, scores)
@@ -215,3 +215,35 @@ def create_reference_subsubject(request):
     form = subject_subsubject_Form(request=request)
     context = {"form": form, "grade":grade, "subject":subject}
     return render(request, 'score_check/create_reference_subsubject.html', context=context)
+
+
+
+def Reference_list_delete(request, pk):
+    ReferenceSubsubject.objects.filter(pk=pk).delete()
+    # something about warning
+
+    return HttpResponse(f'<button disabled>삭제됨</button>')
+
+def Reference_list_update(request, pk):
+    subsubject = ReferenceSubsubject.objects.get(pk=pk)
+    scores = ReferenceScore.objects.filter(subsubject=subsubject).order_by('score_name')
+    return render(request, 'score_check/reference_list_update.html', {'scores': scores, 'pk': pk})
+
+
+def Reference_list_update_instance(request, pk):
+    score_name = request.POST.get('score_name', None)
+    score_list = request.POST.get('score_list', None)
+    subsubject_pk = request.POST.get('subsubject', None)
+    score_id = request.POST.get('score_id', None)
+    print(score_name, score_list, subsubject_pk)
+    # Get the ReferenceSubsubject instance
+    subsubject = ReferenceSubsubject.objects.get(pk=subsubject_pk)
+
+    score = ReferenceScore.objects.get(pk = score_id)
+    score.score_name = score_name
+    score.score_list = score_list
+    score.subsubject = subsubject  # assign the ReferenceSubsubject instance
+    score.save()
+    # return HttpResponse(f'<button disabled>수정됨</button>')
+
+    return render(request, 'score_check/reference_list_update.html', {'scores': [score], 'pk': pk})
