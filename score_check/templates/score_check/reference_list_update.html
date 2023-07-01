@@ -1,0 +1,17 @@
+<div id = "#score_table_{{subsubject.id}}"
+name = "#score_table_{{subsubject.id}}" ></div>
+<table style="border: 1px solid black; border-collapse: collapse;"
+>
+    </table>
+    {% for score in scores %}
+        <form hx-post="/score_check/Reference_list_update_instance/{{pk}}/"
+        >
+            {% csrf_token %}
+             <input type='text' name='score_name' value='{{score.score_name}}' id='score_name' placeholder='점수명'>
+
+                <input type='text' name='score_list' value='{{score.score_list}}' id='score_list' placeholder='점수목록'>
+                <input type="hidden" name="subsubject" value="{{pk}}" id ="subsubject">
+                <input type="hidden" name="score_id" value="{{score.pk}}" id ="score_id">
+                <button type='submit' name = "submit_button{{score.pk}}" id = "submit_button{{score.pk}}">수정</button>
+        </form>
+    {% endfor %}
