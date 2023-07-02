@@ -11,37 +11,16 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os,json
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-secret_file = os.path.join(BASE_DIR, 'secret.json')
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
-def get_secret(setting):
-    """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
-
-
-SECRET_KEY = get_secret("SECRET_KEY")
-
-
-
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-import os, json
-from django.core.exceptions import ImproperlyConfigured
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-m3@e9h#z#@2$enj*!4ug=g$j4i(lqdvde#l)27hel8#(w4%gc)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -107,7 +86,16 @@ WSGI_APPLICATION = 'EPAR.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'schooldata',
+#         'USER': 'postgres',
+#         'PASSWORD': 'qwer1234!',
+#         'HOST': 'localhost',  # or another hostname if your DB is on another server
+#         'PORT': '5432',       # default postgres port
+#     }
+# }
 
 DATABASES = {
     'default': {
