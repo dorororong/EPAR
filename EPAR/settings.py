@@ -85,16 +85,6 @@ WSGI_APPLICATION = 'EPAR.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'schooldata',
-#         'USER': 'postgres',
-#         'PASSWORD': 'qwer1234!',
-#         'HOST': 'localhost',  # or another hostname if your DB is on another server
-#         'PORT': '5432',       # default postgres port
-#     }
-# }
 
 DATABASES = {
     'default': {
