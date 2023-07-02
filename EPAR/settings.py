@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-m3@e9h#z#@2$enj*!4ug=g$j4i(lqdvde#l)27hel8#(w4%gc)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["52.79.69.188"]
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["52.79.69.188"]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -145,6 +145,10 @@ SESSION_COOKIE_AGE = 120 * 60  # 30 minutes, in seconds
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
