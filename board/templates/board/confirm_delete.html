@@ -1,0 +1,22 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">게시판 개별 페이지입니다</h1>
+
+<p>Are you sure you want to delete the following post?</p>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <strong>제목:</strong> {{post.postname}} |
+        <strong>내용:</strong> {{post.content}} |
+        <strong>작성일:</strong> {{post.created_at}}
+    </li>
+</ul>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger mt-2">Confirm Delete</button>
+</form>
+
+<a href="{% url 'board:posting' post.pk %}" class="btn btn-secondary mt-2">Cancel</a>
+{% endblock %}

@@ -9,7 +9,7 @@
             <tbody>
                 {% for list in postlist %}
                 <tr>
-                    <td><a href="{{list.pk}}">{{list.postname}}</a></td>
+                    <td><a href="{{list.pk}}">{{list.postname}}</a>({{list.created_by}})</td>
                 </tr>
                 {% endfor %}
             </tbody>

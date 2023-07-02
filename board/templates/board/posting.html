@@ -4,12 +4,28 @@
 <h1 class="mt-4 mb-4">게시판 개별 페이지입니다</h1>
 
 <ul class="list-group">
-    <a>제목</a> <li class="list-group-item">{{post.postname}}</li>
-    <p></p>
-    <a>내용</a>
-    <li class="list-group-item">{{post.content}}</li>
+    <li class="list-group-item">
+        <strong>제목:</strong> {{post.postname}} |
+        <strong>작성자:</strong> {{post.created_by}} |
+        <strong>작성일:</strong> {{post.created_at}}
+    </li>
+    <li class="list-group-item"><strong>내용:</strong> {{post.content}}</li>
 </ul>
 
 <a href="/board/" class="btn btn-primary mt-2">목록</a>
 
+{% if user.username == post.created_by %}
+    <a href="{% url 'board:update_post' post.pk %}" class="btn btn-secondary mt-2">수정</a>
+    <button onclick="confirmDelete()" class="btn btn-danger mt-2">삭제</button>
+{% endif %}
+
+<script>
+function confirmDelete() {
+    if (confirm('Are you sure you want to delete this post?')) {
+        // if user clicked 'OK', redirect to the delete view
+        window.location.href = "{% url 'board:delete_post' post.pk %}";
+    }
+}
+</script>
 {% endblock %}
+

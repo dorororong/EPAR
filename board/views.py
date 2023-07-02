@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -24,10 +24,32 @@ def new_post_view(request):
     if request.method == 'POST':
         postname = request.POST['postname']
         content = request.POST['content']
-        post = Post(postname=postname, content=content)
+        post = Post(postname=postname, content=content, created_by=request.user.username)
         post.save()
         return redirect(reverse('board:board'))
 
 
 
     return render(request, 'board/new_post.html')
+
+def update_post_view(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == 'POST':
+        postname = request.POST['postname']
+        content = request.POST['content']
+        post.postname = postname
+        post.content = content
+        post.save()
+        return redirect(reverse('board:board'))
+
+    return render(request, 'board/update_post.html', {'post': post})
+
+
+def delete_post_view(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.user.username == post.created_by:
+        post.delete()
+
+    return redirect(reverse('board:board'))
