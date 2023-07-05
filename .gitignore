@@ -2,4 +2,5 @@ EPAR/secret.json
 secret.json
 EPAR/db.sqlite3
 db.sqlite3
-
+EPAR/settings.py
+EPAR/EPAR/settings.py

@@ -111,3 +111,6 @@ def student_enrolled_list(request):
 def delete_enrolled(request, pk):
     student_enrolled.objects.filter(pk=pk).delete()
     return HttpResponse(f'<button class="badge badge-primary badge-pill" disabled>Deleted</button>')
+
+def dev_info_view(request):
+    return render(request, 'base/dev_info.html')
