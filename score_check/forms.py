@@ -34,7 +34,7 @@ GRADE_CHOICES = [
 ]
 
 class subject_subsubject_Form(forms.ModelForm):
-    subsubject = forms.CharField(max_length=10)
+    subsubject = forms.CharField(max_length=40)
     grade = forms.ChoiceField(choices=GRADE_CHOICES)
     class Meta:
         model = Reference_Grade_Subject

@@ -51,6 +51,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'attendance_check.apps.AttendanceCheckConfig',
     'score_check.apps.ScoreCheckConfig',
     'board.apps.BoardConfig',
     'base.apps.BaseConfig',
@@ -138,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'  # 한국 시간대로 변경
 
 USE_I18N = True
 
