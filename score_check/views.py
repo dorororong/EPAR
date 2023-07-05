@@ -179,7 +179,9 @@ def create_reference_subject(request):
 
 
 def reference_list(request):
-    subjects = Reference_Grade_Subject.objects.all().order_by('grade','subject')
+    user_id = request.user.id
+    user_info = get_object_or_404(UserInfo, user_id=user_id)
+    subjects = Reference_Grade_Subject.objects.filter(school=user_info.school.id, semester=user_info.semester.id).order_by('grade','subject')
     subject_id = request.GET.get('subject_id')
     if subject_id:
         selected_subject = Reference_Grade_Subject.objects.get(id=subject_id)
