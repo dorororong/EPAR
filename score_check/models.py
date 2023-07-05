@@ -7,7 +7,7 @@ class Reference_Grade_Subject(models.Model):
     school = models.ForeignKey(SchoolInfo, on_delete=models.CASCADE, related_name='ReferenceSubject')
     semester = models.ForeignKey(SemesterInfo, on_delete=models.CASCADE, related_name='ReferenceSubject')
     grade = models.CharField(max_length=10)
-    subject = models.CharField(max_length=10)
+    subject = models.CharField(max_length=50)
 
     def __str__(self):
         return self.grade + "-" + self.subject
@@ -16,7 +16,7 @@ class Reference_Grade_Subject(models.Model):
 
 class ReferenceSubsubject(models.Model):
     subject = models.ForeignKey(Reference_Grade_Subject, on_delete=models.CASCADE, related_name='ReferenceSubject')
-    subsubject = models.CharField(max_length=10)
+    subsubject = models.CharField(max_length=50)
     def __str__(self):
         return self.subsubject
 
